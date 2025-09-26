@@ -64,3 +64,6 @@ Créé dans le cadre d’un projet d’outils éducatifs pour l’apprentissage 
 
 ![Aperçu du générateur de flashcards](screenshot.png)
 
+### Exemple avec contenu (AnguiTube)
+![VERSO](screenshot2.png)
+
