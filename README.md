@@ -29,7 +29,7 @@ Il permet de créer facilement des cartes pédagogiques recto-verso prêtes à �
 
 ## 🚀 Démo en ligne
 
-👉 [Voir la démo sur GitHub Pages](https://rachid-hammami.github.io/flashcard-demo/)  
+👉 [Voir la démo sur GitHub Pages](https://rachid-hammami.github.io/flashcard-generator/)  
 (*remplace `ton-username` par ton pseudo GitHub*)
 
 ---
