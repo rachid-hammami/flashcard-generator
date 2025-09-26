@@ -1,0 +1,134 @@
+:root{
+  --a4w: 297mm;
+  --a4h: 210mm;
+  --cols: 4;
+  --rows: 2;
+  --cardw: calc(var(--a4w) / var(--cols));
+  --cardh: calc(var(--a4h) / var(--rows));
+
+  /* Contours et espacements */
+  --border-thickness: 6pt;
+  --card-padding: 2mm;    /* réduit comme demandé */
+
+  /* Taille par défaut (en points) */
+  --font-default: 50pt;   /* appliquée au départ partout */
+}
+
+*{ box-sizing: border-box; }
+body{ font-family: 'Roboto Condensed', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin:0; background:#f7f7fb; color:#111;font-weight: 600; }
+
+/* === Barre de contrôle === */
+#controls{ position:sticky; top:0; z-index:1000; background:#fff; border-bottom:1px solid #e5e7eb; padding:12px 16px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+#controls .group{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+#controls label{ font-size:14px; color:#374151; }
+#controls input[type="text"]{ width:170px; padding:8px 10px; border:1px solid #d1d5db; border-radius:8px; }
+#controls input[type="file"]{ padding:6px; }
+#controls input[type="range"]{ width:160px; }
+#controls input[type="number"]{ width:100px; padding:6px; border:1px solid #d1d5db; border-radius:8px; }
+#controls button{ padding:10px 14px; border:0; border-radius:10px; background:#111827; color:#fff; cursor:pointer; font-weight:700; }
+#controls button.secondary{ background:#4b5563; }
+#controls button.ghost{ background:#e5e7eb; color:#111; }
+
+/* === Pages A4 === */
+.pages{ padding:16px; display:grid; gap:16px; }
+.page{ background:#fff; box-shadow: 0 8px 24px rgba(0,0,0,.08); width: 297mm; height: 210mm; position:relative; overflow:hidden; }
+.page .sheet{ position:absolute; inset:0; display:grid; grid-template-columns: repeat(4, var(--cardw)); grid-template-rows: repeat(2, var(--cardh)); }
+
+/* === Carte === */
+.card {
+  width:100%;
+  height:100%;
+  border: var(--border-thickness) solid #111;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: var(--card-padding);
+  overflow: hidden;   /* cache tout ce qui dépasse */
+}
+
+/* Recto */
+.recto .card .img-wrap{ position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+.img-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;   /* garde proportions sans dépasser */
+  background: transparent; /* pas de fond blanc ajouté */
+  z-index: 0;            /* sous les autres éléments */
+}
+
+.recto .card img{ max-width:100%; max-height:100%; object-fit:contain; image-rendering:auto; }
+
+/* Verso */
+.verso .card{
+  display: grid;
+  grid-template-rows: 1fr auto; /* zone mot + zone contrôles */
+}
+.word{
+  width:100%; height:100%;
+  display:flex;
+  align-items:center;  /* centre verticalement */
+  justify-content:center; /* centre horizontalement */
+  padding: 0;
+  text-align:center;
+}
+
+.word span{
+  display:block;
+  font-weight:700;
+  line-height:1.1;
+  white-space: nowrap;       /* on garde une seule ligne par défaut */
+  overflow: hidden;
+  text-overflow: clip;
+  transform-origin: center;
+  max-width: 100%;
+  max-height: 100%;
+  letter-spacing: 0px;
+  font-size: var(--font-default); /* valeur de base */
+}
+
+/* Contrôles par carte */
+.size-controls{ font-size:12px; color:#374151; display:flex; gap:8px; align-items:center; justify-content:center; flex-wrap:wrap; padding-bottom:6px; }
+.size-controls input[type="number"]{ width:90px; padding:6px; }
+.size-controls button{ padding:6px 10px; border-radius:8px; background:#111827; color:#fff; border:0; }
+.size-controls .btn-ghost{ background:#e5e7eb; color:#111; }
+.size-controls .muted{ color:#6b7280; }
+
+/* Divers */
+.badge{ position:absolute; top:6mm; left:6mm; background:#111; color:#fff; font-size:11px; padding:4px 6px; border-radius:6px; opacity:0.6; }
+.cutlines{ position:absolute; inset:0; pointer-events:none; }
+.cutlines .v, .cutlines .h{ position:absolute; background:#111; opacity:0.35; }
+.cutlines .v{ width:0.2mm; top:0; bottom:0; }
+.cutlines .h{ height:0.2mm; left:0; right:0; }
+.hidden{ display:none !important; }
+.muted{ color:#6b7280; font-size:13px; }
+
+@media print {
+  #controls{ display:none !important; }
+  .size-controls { display: none !important; }
+  body{ background:#fff; }
+  .pages{ padding:0; gap:0; }
+  .page{ box-shadow:none; page-break-after: always; }
+  @page{ size: A4 landscape; margin: 0; }
+  .badge{ display:none !important; }
+  .img-controls { display:none !important; }
+
+}
+.img-controls {
+   position: absolute;   /* flottant, ne prend aucune place */
+   bottom: 2mm;
+   left: 50%;
+   transform: translateX(-50%);
+   display: flex;
+   gap: 6px;
+   z-index: 10;          /* au-dessus de l’image */
+}
+.img-controls button {
+   padding: 4px 8px;
+   border-radius: 6px;
+   background: #e5e7eb;
+   border: 0;
+   cursor: pointer;
+}
+body.printing #controls,
+body.printing .size-controls { display: none !important; }

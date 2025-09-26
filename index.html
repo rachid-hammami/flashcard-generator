@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Planches A4 – 8 cartes (A7) — Taille par carte (+/− 5 pt & cassure article)</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="controls">
+    <div class="group">
+      <label for="imgFiles">Images recto (8 max) :</label>
+      <input id="imgFiles" type="file" accept="image/*" multiple />
+    </div>
+
+    <div class="group">
+      <label>Contours :</label>
+      <input id="borderRange" type="range" min="1" max="16" value="6" />
+      <span id="borderVal" class="muted">6 pt</span>
+    </div>
+
+    <!-- === Panneau tailles globales (défaut) === -->
+    <div class="group">
+      <label>Taille par défaut (pt)</label>
+      <input id="inpDefault" type="number" min="6" max="200" step="1" value="50" />
+      <button id="btnApplyDefaultSize" class="secondary">Définir comme valeur par défaut</button>
+      <button id="btnApplyDefaultEverywhere" class="ghost">Appliquer à toutes les cartes</button>
+    </div>
+
+    <div class="group">
+      <input id="mirrorVerso" type="checkbox" />
+      <label for="mirrorVerso">Miroir verso (duplex bord court)</label>
+    </div>
+    <div class="group">
+      <input id="toggleCut" type="checkbox" />
+      <label for="toggleCut">Traits de coupe internes</label>
+    </div>
+    <div class="group">
+      <button id="showRecto" class="secondary">Aperçu Recto</button>
+      <button id="showVerso" class="secondary">Aperçu Verso</button>
+      <button id="showBoth" class="ghost">Voir 2 pages</button>
+    </div>
+    <div class="group">
+      <button id="print">Imprimer / Exporter PDF</button>
+      <button id="exportPng">Exporter PNG 300 dpi (page visible)</button>
+    </div>
+  </div>
+
+  <div class="pages">
+    <section id="page-recto" class="page recto">
+      <div class="sheet" id="rectoSheet"></div>
+      <div class="cutlines hidden" id="cutRecto"></div>
+    </section>
+    <section id="page-verso" class="page verso hidden">
+      <div class="sheet" id="versoSheet"></div>
+      <div class="cutlines hidden" id="cutVerso"></div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
