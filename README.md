@@ -29,7 +29,7 @@ Il permet de créer facilement des cartes pédagogiques recto-verso prêtes à �
 
 ## 🚀 Démo en ligne
 
-👉 [Voir la démo sur GitHub Pages](https://ton-username.github.io/flashcard-demo/)  
+👉 [Voir la démo sur GitHub Pages](https://rachid-hammami.github.io/flashcard-demo/)  
 (*remplace `ton-username` par ton pseudo GitHub*)
 
 ---
@@ -59,3 +59,8 @@ flashcard-demo/
 
 Projet libre d’utilisation à but pédagogique.  
 Créé dans le cadre d’un projet d’outils éducatifs pour l’apprentissage du vocabulaire.
+
+## 📸 Aperçu
+
+![Aperçu du générateur de flashcards](screenshot.png)
+
